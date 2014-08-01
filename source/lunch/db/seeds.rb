@@ -33,7 +33,7 @@ module Create
 
 end
 
-nyc_zips=[10005, 10006, 10007, 10038, 10280, 10002, 10003, 10009, 10021, 10028, 10044, 10128, 10023, 10024, 10025]
+nyc_zips=[11211, 10005, 10006, 10007, 10038, 10280, 10002, 10003, 10009, 10021, 10028, 10044, 10128, 10023, 10024, 10025]
 
 nyc_zips.each do |zip|
   Create.restaurants(Yelp.client.search(zip, term: "food").businesses)
