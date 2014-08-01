@@ -6,7 +6,7 @@ class View
 
   def display_restaurant(restaurant)
     puts "\tname: #{restaurant.name}"
-    puts "\tcuisine: #{restaurant.cuisine}"
+    puts "\tcuisine: #{restaurant.cuisine.name}"
     puts "\taddress: #{restaurant.address}"
     puts "\tzip: #{restaurant.zip}"
   end

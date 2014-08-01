@@ -1,56 +1,62 @@
 require 'launchy'
 require_relative '../views/view'
+require_relative '../../config/application'
+require_relative '../models/cuisine'
+require_relative '../models/restaurant'
+
+
 
 class Controller
-  attr_reader :rest, :view
+  attr_accessor :rest, :view, :input
   def initialize
     @view = View.new
-    @rest = [Restaurant.new(name: 'Chipotle', cuisine: 'mexican', address: 'somewhere', zip: '10001'),
-             Restaurant.new(name: 'Chipotle2', cuisine: 'mexican2', address: 'somewhere2', zip: '10002'),
-             Restaurant.new(name: 'Chipotle3', cuisine: 'mexican3', address: 'somewhere3', zip: '10003')]
+    @input = ""
+    @rest = ""
     run
   end
 
+  def set_pick
+
+  end
+
+  def get_random_restaurant(zip)
+    restaurants = Restaurant.where(zip: zip)
+    self.rest = restaurants.sample
+
+  end
+
   def run
+
     while true
       pick = get_random_restaurant(view.zip)
       view.display_pick(pick)
       input = view.get_input
-      acceptable = true
       case input
       when "accept"
-        # Launchy.open(pick.url)
-        puts "Launchy makey"
+        Launchy.open(rest.url)
         break
       when "deny"
         redo
       when "exit"
         break
       else
-        # acceptable
-        # "#{input}?? What's that. Look up!"
-
+        break
       end
     end
   end
 
-  def get_random_restaurant(zip)
-    # restaurants = Restaurant.where(zip: zip)
-    # offset = rand(restaurants.count)
-    # restaurants.first(:offset => offset)
-    rest.sample
-  end
+
 
 
 end
 
-class Restaurant
-  attr_reader :name, :cuisine, :address, :zip
-  def initialize(args = {})
-    @name = args[:name]
-    @cuisine = args[:cuisine]
-    @address = args[:address]
-    @zip = args[:zip]
-  end
-end
+# class Restaurant
+#   attr_reader :name, :cuisine, :address, :zip
+#   def initialize(args = {})
+#     @name = args[:name]
+#     @cuisine = args[:cuisine]
+#     @address = args[:address]
+#     @zip = args[:zip]
+#   end
+# end
 
