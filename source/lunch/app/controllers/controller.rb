@@ -40,6 +40,7 @@ class Controller
       when "exit"
         break
       else
+        puts "That doesn't exist. Try again soon."
         break
       end
     end
